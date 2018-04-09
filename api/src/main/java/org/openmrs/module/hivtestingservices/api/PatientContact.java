@@ -1,18 +1,14 @@
 package org.openmrs.module.hivtestingservices.api;
 
 
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-import org.openmrs.patient.*;
-import org.openmrs.Patient;
-import org.openmrs.User;
-import javax.persistence.*;
-import java.util.Date;
 import org.openmrs.Obs;
+import org.openmrs.Patient;
+
+import java.util.Date;
 
 public class PatientContact {
 
-    private int id;
+    private Integer id;
     private String uuid;
     private Obs obsGroupId;
     private String firstName;
@@ -25,23 +21,27 @@ public class PatientContact {
     private Patient patientRelatedTo;
     private String relationType;
     private Date appointmentDate;
-    private int baselineHivStatus;
-    private int ipvOutcome;
+    private String baselineHivStatus;
+    private String ipvOutcome;
     private Patient patient;
     private Date dateCreated;
-    private int changedBy;
+    private Integer changedBy;
     private Date dateChanged;
     private boolean voided;
-    private int voidedBy;
+    private Integer voidedBy;
     private Date dateVoided;
     private String voidedReason;
 
     public PatientContact() {
     }
 
-    public PatientContact(String uuid,/* int obsGroupId, */String firstName, String middleName, String lastName, String sex, Date birthDate, String physicalAddress, String phoneContact, /*int patientRelatedTo,*/ String relationType, Date appointmentDate, int baselineHivStatus, int ipvOutcome, Date dateCreated, int changedBy, Date dateChanged, boolean voided, int voidedBy, Date dateVoided, String voidedReason) {
+    public PatientContact(String uuid, String firstName, String middleName,
+                          String lastName, String sex, Date birthDate, String physicalAddress,
+                          String phoneContact, String relationType, Date appointmentDate,
+                          String baselineHivStatus, String ipvOutcome, Date dateCreated,
+                          Integer changedBy, Date dateChanged, boolean voided, Integer voidedBy, Date dateVoided, String voidedReason) {
         this.uuid = uuid;
-       // this.obsGroupId = obsGroupId;
+        // this.obsGroupId = obsGroupId;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -49,7 +49,7 @@ public class PatientContact {
         this.birthDate = birthDate;
         this.physicalAddress = physicalAddress;
         this.phoneContact = phoneContact;
-       // this.patientRelatedTo = patientRelatedTo;
+        // this.patientRelatedTo = patientRelatedTo;
         this.relationType = relationType;
         this.appointmentDate = appointmentDate;
         this.baselineHivStatus = baselineHivStatus;
@@ -63,12 +63,12 @@ public class PatientContact {
         this.voidedReason = voidedReason;
     }
 
+
     public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid)
-    {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
@@ -76,16 +76,16 @@ public class PatientContact {
         return obsGroupId;
     }
 
-   /* public int getObsGroupId() {
-        return obsGroupId;
-    }
+    /* public int getObsGroupId() {
+         return obsGroupId;
+     }
 
-    public void setObsGroupId(int obsGroupId){
+     public void setObsGroupId(int obsGroupId){
+         this.obsGroupId = obsGroupId;
+     }*/
+    public void setObsGroupId(Obs obsGroupId) {
         this.obsGroupId = obsGroupId;
-    }*/
-   public void setObsGroupId(Obs obsGroupId) {
-       this.obsGroupId = obsGroupId;
-   }
+    }
 
     public Patient getPatientRelatedTo() {
         return patientRelatedTo;
@@ -94,6 +94,7 @@ public class PatientContact {
     public void setPatientRelatedTo(Patient patientRelatedTo) {
         this.patientRelatedTo = patientRelatedTo;
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -174,19 +175,19 @@ public class PatientContact {
         this.appointmentDate = appointmentDate;
     }
 
-    public int getBaselineHivStatus() {
+    public String getBaselineHivStatus() {
         return baselineHivStatus;
     }
 
-    public void setBaselineHivStatus(int baselineHivStatus) {
+    public void setBaselineHivStatus(String baselineHivStatus) {
         this.baselineHivStatus = baselineHivStatus;
     }
 
-    public int getIpvOutcome() {
+    public String getIpvOutcome() {
         return ipvOutcome;
     }
 
-    public void setIpvOutcome(int ipvOutcome) {
+    public void setIpvOutcome(String ipvOutcome) {
         this.ipvOutcome = ipvOutcome;
     }
 
@@ -198,11 +199,11 @@ public class PatientContact {
         this.dateCreated = dateCreated;
     }
 
-    public int getChangedBy() {
+    public Integer getChangedBy() {
         return changedBy;
     }
 
-    public void setChangedBy(int changedBy) {
+    public void setChangedBy(Integer changedBy) {
         this.changedBy = changedBy;
     }
 
@@ -222,11 +223,11 @@ public class PatientContact {
         this.voided = voided;
     }
 
-    public int getVoidedBy() {
+    public Integer getVoidedBy() {
         return voidedBy;
     }
 
-    public void setVoidedBy(int voidedBy) {
+    public void setVoidedBy(Integer voidedBy) {
         this.voidedBy = voidedBy;
     }
 
@@ -246,11 +247,11 @@ public class PatientContact {
         this.voidedReason = voidedReason;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

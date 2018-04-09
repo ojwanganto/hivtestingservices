@@ -31,7 +31,7 @@ import java.util.List;
 @Transactional
 public interface HTSService extends OpenmrsService {
     public List<PatientContact> getPatientContacts();
-    public void persistPatientContact(PatientContact patientContact);
+    public PatientContact savePatientContact(PatientContact patientContact);
     public List<PatientContact> searchPatientContact(String searchName);
     public void voidPatientContact(int theId);
 }

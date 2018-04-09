@@ -25,12 +25,15 @@ public class PatientContactListPageController {
     protected static final Log log = LogFactory.getLog(PatientContactListPageController.class);
 
     public void controller(@SpringBean KenyaUiUtils kenyaUi,
+                           @RequestParam(value = "patientId") Patient patient,
                            UiUtils ui, PageModel model) {
 
-        HTSService service = Context.getService(HTSService.class);
-        System.out.println("Testing service ================ " + service.getPatientContacts().size());
-        List<PatientContact> patientContacts = service.getPatientContacts();
+        HTSService htsService = Context.getService(HTSService.class);
+        List<PatientContact> patientContacts = htsService.getPatientContacts();
+
         model.put("contacts", patientContacts);
+        model.put("patient", patient);
+
     }
 
   /*  @RequestMapping("/patientContactList")

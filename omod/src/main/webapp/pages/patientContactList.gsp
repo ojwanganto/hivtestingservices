@@ -68,7 +68,7 @@ div.section-title {
         <div class="ke-panel-heading">Patient Contacts</div>
 
         <div class="ke-panel-content">
-            <div class="section-title">Patient Contacts list</div>
+            <div class="section-title"></div>
 
             <div class="clear"></div>
             <% if (contacts) { %>
@@ -116,9 +116,19 @@ div.section-title {
 
         <div class="clear"></div>
     </div>
-    <% } } else { %>
+    <% }
+    } else { %>
     No Patient Contact found
     <% } %>
+</div>
+
+<div class="ke-panel-footer">
+
+    <button type="button" onclick="ui.navigate('${ ui.pageLink("hivtestingservices", "newEditPatientContactForm", [ patientId: patient.id,  returnUrl: ui.thisUrl() ])}')">
+        <img src="${ ui.resourceLink("kenyaui", "images/glyphs/add.png") }" /> Add Contact
+    </button>
+
+
 </div>
 
 

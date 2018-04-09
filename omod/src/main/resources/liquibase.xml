@@ -49,17 +49,17 @@
             <column name="patient_related_to" type="int">
                 <constraints nullable="false" />
             </column>
-            <column name="relationship_type" type="int">
+            <column name="relationship_type" type="varchar(255)">
                 <constraints nullable="false"  />
             </column>
             <column name="appointment_date" type="datetime">
                 <constraints nullable="true"  />
             </column>
-            <column name="baseline_hiv_status" type="int">
-                <constraints nullable="false"  />
+            <column name="baseline_hiv_status" type="varchar(255)">
+                <constraints nullable="true"  />
             </column>
-            <column name="ipv_outcome" type="int">
-                <constraints nullable="false"  />
+            <column name="ipv_outcome" type="varchar(255)">
+                <constraints nullable="true"  />
             </column>
             <column name="patient_id" type="int">
                 <constraints nullable="true" />

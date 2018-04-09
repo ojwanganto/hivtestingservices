@@ -3,12 +3,12 @@
  * Version 1.0 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
  * http://license.openmrs.org
- *
+ * <p>
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
  * License for the specific language governing rights and limitations
  * under the License.
- *
+ * <p>
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
 package org.openmrs.module.hivtestingservices.api.impl;
@@ -23,13 +23,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 /**
  * It is a default implementation of {@link HTSService}.
  */
 
-public class HTSServiceImpl extends BaseOpenmrsService implements HTSService{
+public class HTSServiceImpl extends BaseOpenmrsService implements HTSService {
+
+    @Override
+    public List<PatientContact> getPatientContacts() {
+        return patientContactDAO.getPatientContacts();
+    }
+
+    @Override
+    public PatientContact savePatientContact(PatientContact patientContact) {
+    return  patientContact;
+    }
 
     protected final Log log = LogFactory.getLog(this.getClass());
 
@@ -43,20 +54,8 @@ public class HTSServiceImpl extends BaseOpenmrsService implements HTSService{
         return patientContactDAO;
     }
 
-    public HibernateHTSDAO getDao()
-    {
+    public HibernateHTSDAO getDao() {
         return patientContactDAO;
-    }
-
-    @Override
-    public  List<PatientContact> getPatientContacts(){
-
-        return patientContactDAO.getPatientContacts();
-    }
-
-    @Override
-    public void persistPatientContact(PatientContact patientContact){
-        patientContactDAO.persistPatientContact(patientContact);
     }
 
     @Override
@@ -66,7 +65,7 @@ public class HTSServiceImpl extends BaseOpenmrsService implements HTSService{
     }
 
     @Override
-    public void voidPatientContact(int theId){
+    public void voidPatientContact(int theId) {
         patientContactDAO.voidPatientContact(theId);
     }
 

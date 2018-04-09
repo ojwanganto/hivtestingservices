@@ -21,7 +21,8 @@ import java.util.List;
  *  Database methods for {@link HTSService}.
  */
 public interface HTSDAO {
-    public void persistPatientContact(PatientContact patientContact);
+    public void savePatientContact(PatientContact patientContact);
+    //public List<PatientContact> getPatientContacts(int theId);
     public List<PatientContact> getPatientContacts();
     public void voidPatientContact(int theId);
     public List<PatientContact> searchPatientContact(String searchName);
