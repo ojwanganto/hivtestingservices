@@ -32,7 +32,7 @@
 		<property name="voided" type="java.lang.Boolean" column="voided" length="1"/>
 		<many-to-one name="voidedBy" class ="org.openmrs.User" column="voided_by"/>
 		<property name="dateVoided" type ="java.util.Date" column ="date_voided" length="19"/>
-		<property name="voidedReason" type="java.lang.String" column="voided_reason" length="255"/>
+		<property name="voidReason" type="java.lang.String" column="voided_reason" length="255"/>
 
 
 	</class>

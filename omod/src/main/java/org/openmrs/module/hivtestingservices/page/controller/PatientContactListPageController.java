@@ -35,31 +35,6 @@ public class PatientContactListPageController {
         model.put("patient", patient);
 
     }
-
-  /*  @RequestMapping("/patientContactList")
-    public String listPatientContacts(Model model) {
-        //get patient contacts from the service
-        List<PatientContact> patientContacts = htsService.getPatientContacts();
-        model.addAttribute("patientContacts", patientContacts);
-        return "patientContactList";
-
-    }*/
-
- /*   @RequestMapping("/addPatientContact")
-    public String addPatientContact(Model model){
-
-        //Model attribute to bind the form data
-        PatientContact patientContact = new PatientContact();
-        model.addAttribute("patientContact",patientContact);
-        return "addPatientContact";
-    }
-
-  /*  @PostMapping("/savePatientContact"){
-
-        public String savePatientContact(@ModelAttribute("patientContact") PatientContact patientContact){
-    //save patient contact using the service
-            htsService.persistPatientContact(patientContact);
-        }*/
     }
 
 

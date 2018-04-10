@@ -120,16 +120,18 @@ div.section-title {
     } else { %>
     No Patient Contact found
     <% } %>
+
+    <div align="center">
+
+        <button type="button" onclick="ui.navigate('${ ui.pageLink("hivtestingservices", "newEditPatientContactForm", [ patientId: patient.id,  returnUrl: ui.thisUrl() ])}')">
+            <img src="${ ui.resourceLink("kenyaui", "images/glyphs/add.png") }" /> Add Contact
+        </button>
+
+
+    </div>
 </div>
 
-<div class="ke-panel-footer">
 
-    <button type="button" onclick="ui.navigate('${ ui.pageLink("hivtestingservices", "newEditPatientContactForm", [ patientId: patient.id,  returnUrl: ui.thisUrl() ])}')">
-        <img src="${ ui.resourceLink("kenyaui", "images/glyphs/add.png") }" /> Add Contact
-    </button>
-
-
-</div>
 
 
 

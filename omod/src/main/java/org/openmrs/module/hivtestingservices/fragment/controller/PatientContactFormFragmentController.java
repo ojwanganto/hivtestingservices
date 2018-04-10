@@ -26,10 +26,11 @@ import java.util.List;
 public class PatientContactFormFragmentController {
 
     public void controller(@FragmentParam(value = "patientContact", required = false) PatientContact patientContact,
-                           @FragmentParam(value = "patientId", required = true) Patient patient,
+                           @RequestParam(value = "patientId", required = true) Patient patient,
                            PageModel model) {
 
         PatientContact exists = patientContact != null ? patientContact : null;
+        System.out.println("Patient ID =============================================: " + patient.getPatientId());
         model.addAttribute("command", newEditPatientContactForm(exists, patient));
         model.addAttribute("relationshipTypeOptions", getRelationshipTypeOptions());
 
@@ -40,11 +41,10 @@ public class PatientContactFormFragmentController {
 
         for (RelationshipType type : Context.getPersonService().getAllRelationshipTypes()) {
             if (type.getaIsToB().equals(type.getbIsToA())) {
-                options.add(SimpleObject.create("value", type.getId() + "", "label", type.getaIsToB()));
+                options.add(SimpleObject.create("value", type.getId(), "label", type.getaIsToB()));
             }
             else {
-                options.add(SimpleObject.create("value", type.getId() + ":A", "label", type.getaIsToB()));
-                options.add(SimpleObject.create("value", type.getId() + ":B", "label", type.getbIsToA()));
+                options.add(SimpleObject.create("value", type.getId(), "label", type.getaIsToB()));
             }
         }
 
@@ -55,23 +55,20 @@ public class PatientContactFormFragmentController {
 
         PatientContact patientContact = form.save();
 
-        return SimpleObject.create("id", patientContact.getId());
+        return SimpleObject.create("id", patientContact.getPatientRelatedTo().getId());
     }
 
-    public EditPatientContactForm newEditPatientContactForm(@RequestParam(value = "id", required = false) PatientContact patientContact, Patient patient) {
+    public EditPatientContactForm newEditPatientContactForm(@RequestParam(value = "id", required = false) PatientContact patientContact, @RequestParam(value = "patientRelatedTo", required = true) Patient patient) {
         if (patientContact != null) {
 
-            return new EditPatientContactForm(patientContact);
+            return new EditPatientContactForm(patientContact, patient);
         } else {
-            return new EditPatientContactForm();
+            return new EditPatientContactForm(patient);
         }
     }
 
     public class EditPatientContactForm extends AbstractWebForm {
 
-        /* private int id;
-         private String uuid;
-         private Obs obsGroupId;*/
         private PatientContact original;
         private String firstName;
         private String middleName;
@@ -85,36 +82,30 @@ public class PatientContactFormFragmentController {
         private Date appointmentDate;
         private String baselineHivStatus;
         private String ipvOutcome;
-       /* private Patient patient;
-        private Date dateCreated;
-        private int changedBy;
-        private Date dateChanged;
-        private boolean voided;
-        private int voidedBy;
-        private Date dateVoided;
-        private String voidedReason;*/
+
 
         public EditPatientContactForm() {
         }
 
-        public EditPatientContactForm(PatientContact patientContact) {
+        public EditPatientContactForm(Patient patient) {
+            this.patientRelatedTo = patient;
         }
 
         public EditPatientContactForm(PatientContact patientContact, Patient patient) {
-            this(patientContact);
-            original = patientContact;
-            firstName = patientContact.getFirstName();
-            middleName = patientContact.getMiddleName();
-            lastName = patientContact.getLastName();
-            sex = patientContact.getSex();
-            birthDate = patientContact.getBirthDate();
-            physicalAddress = patientContact.getPhysicalAddress();
-            phoneContact = patientContact.getPhoneContact();
-            patientRelatedTo = patient;
-            relationType = patientContact.getRelationType();
-            appointmentDate = patientContact.getAppointmentDate();
-            baselineHivStatus = patientContact.getBaselineHivStatus();
-            ipvOutcome = patientContact.getIpvOutcome();
+
+            this.original = patientContact;
+            this.firstName = patientContact.getFirstName();
+            this.middleName = patientContact.getMiddleName();
+            this.lastName = patientContact.getLastName();
+            this.sex = patientContact.getSex();
+            this.birthDate = patientContact.getBirthDate();
+            this.physicalAddress = patientContact.getPhysicalAddress();
+            this.phoneContact = patientContact.getPhoneContact();
+            this.patientRelatedTo = patient;
+            this.relationType = patientContact.getRelationType();
+            this.appointmentDate = patientContact.getAppointmentDate();
+            this.baselineHivStatus = patientContact.getBaselineHivStatus();
+            this.ipvOutcome = patientContact.getIpvOutcome();
 
         }
 
@@ -126,7 +117,7 @@ public class PatientContactFormFragmentController {
             } else {
                 toSave = new PatientContact();
             }
-            toSave = new PatientContact();
+
             toSave.setFirstName(firstName);
             toSave.setMiddleName(middleName);
             toSave.setLastName(lastName);
@@ -134,6 +125,8 @@ public class PatientContactFormFragmentController {
             toSave.setBirthDate(birthDate);
             toSave.setPatientRelatedTo(patientRelatedTo);
             toSave.setRelationType(relationType);
+            toSave.setPhysicalAddress(physicalAddress);
+            toSave.setPhoneContact(phoneContact);
             toSave.setAppointmentDate(appointmentDate);
             toSave.setBaselineHivStatus(baselineHivStatus);
             toSave.setIpvOutcome(ipvOutcome);
@@ -143,7 +136,7 @@ public class PatientContactFormFragmentController {
 
         @Override
         public void validate(Object o, Errors errors) {
-            require(errors, "gender");
+            require(errors, "sex");
             require(errors, "birthDate");
             if (birthDate != null) {
                 if (birthDate.after(new Date())) {

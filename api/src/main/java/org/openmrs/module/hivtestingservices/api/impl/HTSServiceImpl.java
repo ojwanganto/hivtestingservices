@@ -32,6 +32,12 @@ import java.util.List;
 
 public class HTSServiceImpl extends BaseOpenmrsService implements HTSService {
 
+
+
+    protected final Log log = LogFactory.getLog(this.getClass());
+
+    private HibernateHTSDAO patientContactDAO;
+
     @Override
     public List<PatientContact> getPatientContacts() {
         return patientContactDAO.getPatientContacts();
@@ -39,13 +45,8 @@ public class HTSServiceImpl extends BaseOpenmrsService implements HTSService {
 
     @Override
     public PatientContact savePatientContact(PatientContact patientContact) {
-    return  patientContact;
+        return  patientContactDAO.savePatientContact(patientContact);
     }
-
-    protected final Log log = LogFactory.getLog(this.getClass());
-
-    private HibernateHTSDAO patientContactDAO;
-
     public void setPatientContactDAO(HibernateHTSDAO patientContactDAO) {
         this.patientContactDAO = patientContactDAO;
     }
@@ -67,6 +68,11 @@ public class HTSServiceImpl extends BaseOpenmrsService implements HTSService {
     @Override
     public void voidPatientContact(int theId) {
         patientContactDAO.voidPatientContact(theId);
+    }
+
+    @Override
+    public PatientContact getPatientContactByID(Integer patientContactId) {
+        return null;
     }
 
     @Override

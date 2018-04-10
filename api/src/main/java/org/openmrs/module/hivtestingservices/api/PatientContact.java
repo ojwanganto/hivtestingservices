@@ -1,12 +1,14 @@
 package org.openmrs.module.hivtestingservices.api;
 
 
+import org.openmrs.BaseOpenmrsData;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
 
 import java.util.Date;
+import java.util.UUID;
 
-public class PatientContact {
+public class PatientContact extends BaseOpenmrsData {
 
     private Integer id;
     private String uuid;
@@ -24,15 +26,16 @@ public class PatientContact {
     private String baselineHivStatus;
     private String ipvOutcome;
     private Patient patient;
-    private Date dateCreated;
+/*    private Date dateCreated;
     private Integer changedBy;
     private Date dateChanged;
     private boolean voided;
     private Integer voidedBy;
     private Date dateVoided;
-    private String voidedReason;
+    private String voidedReason;*/
 
     public PatientContact() {
+        prePersist();
     }
 
     public PatientContact(String uuid, String firstName, String middleName,
@@ -54,16 +57,21 @@ public class PatientContact {
         this.appointmentDate = appointmentDate;
         this.baselineHivStatus = baselineHivStatus;
         this.ipvOutcome = ipvOutcome;
-        this.dateCreated = dateCreated;
+/*        this.dateCreated = dateCreated;
         this.changedBy = changedBy;
         this.dateChanged = dateChanged;
         this.voided = voided;
         this.voidedBy = voidedBy;
         this.dateVoided = dateVoided;
-        this.voidedReason = voidedReason;
+        this.voidedReason = voidedReason;*/
     }
 
 
+    public void prePersist(){
+
+        if(null == getUuid())
+            setUuid(UUID.randomUUID().toString());
+    }
     public String getUuid() {
         return uuid;
     }
@@ -191,7 +199,7 @@ public class PatientContact {
         this.ipvOutcome = ipvOutcome;
     }
 
-    public Date getDateCreated() {
+    /*public Date getDateCreated() {
         return dateCreated;
     }
 
@@ -245,7 +253,7 @@ public class PatientContact {
 
     public void setVoidedReason(String voidedReason) {
         this.voidedReason = voidedReason;
-    }
+    }*/
 
     public Integer getId() {
         return id;

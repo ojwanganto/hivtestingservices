@@ -45,7 +45,7 @@
 
 <form id="edit-patient-contact-form" method="post" action="${ui.actionLink("hivtestingservices", "patientContactForm", "savePatientContact")}">
     <% if (command.original) { %>
-    <input type="hidden" name="patientContactId" value="${command.original.id}"/>
+    <input type="hidden" name="id" value="${command.original.id}"/>
     <% } %>
 
     <div class="ke-panel-content">
@@ -58,7 +58,7 @@
 
     <fieldset>
             <legend>Demographics</legend>
-
+        <input type="hidden" name="patientRelatedTo" value="${currentPatient.id}"/>
             <% nameFields.each { %>
             ${ui.includeFragment("kenyaui", "widget/rowOfFields", [fields: it])}
             <% } %>
@@ -70,7 +70,7 @@
                         <span class="ke-field-content">
                             <input type="radio" name="sex" value="F"
                                    id="gender-F" ${command.sex == 'F' ? 'checked="checked"' : ''}/> Female
-                            <input type="radio" name="gender" value="M"
+                            <input type="radio" name="sex" value="M"
                                    id="gender-M" ${command.sex == 'M' ? 'checked="checked"' : ''}/> Male
                             <span id="gender-F-error" class="error" style="display: none"></span>
                             <span id="gender-M-error" class="error" style="display: none"></span>
@@ -130,7 +130,7 @@
     //On ready
     jQuery(function () {
 
-        jQuery('#from-age-button').appendTo(jQuery('#from-age-button-placeholder'));
+        //jQuery('#from-age-button').appendTo(jQuery('#from-age-button-placeholder'));
         jQuery('#edit-patient-contact-form .cancel-button').click(function () {
             ui.navigate('${ config.returnUrl }');
         });
@@ -140,10 +140,10 @@
                     <% if (config.returnUrl) { %>
                     ui.navigate('${ config.returnUrl }');
                     <% } else { %>
-                    ui.navigate('hivtestingservices', 'patientContactForm', {patientId: data.id});
+                    ui.navigate('hivtestingservices', 'patientContactList', {patientId: data.id});
                     <% } %>
                 } else {
-                    kenyaui.notifyError('Saving patient contact was successful, but unexpected response');
+                    kenyaui.notifyError('Saving patient contact was successful, but with unexpected response');
                 }
             }
         });

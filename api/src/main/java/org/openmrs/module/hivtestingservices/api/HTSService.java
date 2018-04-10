@@ -34,4 +34,5 @@ public interface HTSService extends OpenmrsService {
     public PatientContact savePatientContact(PatientContact patientContact);
     public List<PatientContact> searchPatientContact(String searchName);
     public void voidPatientContact(int theId);
+    public PatientContact getPatientContactByID (Integer patientContactId);
 }
